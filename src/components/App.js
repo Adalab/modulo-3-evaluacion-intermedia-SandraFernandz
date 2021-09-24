@@ -26,8 +26,8 @@ function App() {
     ev.preventDefault();
     const newClub = {
       name: newName,
-      openOnWeekDays: newWeekDay,
-      openOnWeekEnds: newWeekEnd,
+      openOnWeekdays: newWeekDay,
+      openOnWeekend: newWeekEnd,
     };
     setData([...data, newClub]);
   };

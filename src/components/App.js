@@ -22,12 +22,9 @@ function App() {
     setNewWeekEnd(ev.currentTarget.checked);
   };
 
-  // const handleSubmit = (ev) => {
-  //   setNewName('');
-  // };
-
   const handleClick = (ev) => {
     ev.preventDefault();
+    // estas acciones requieren que los values de los inputs estén controlados con checked= y value= respectivamente
     setNewName('');
     setNewWeekDay(false);
     setNewWeekEnd(false);

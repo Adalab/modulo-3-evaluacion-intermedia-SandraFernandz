@@ -6,8 +6,8 @@ function App() {
   const [data, setData] = useState(dataClubs);
   //Estados
   const [newName, setNewName] = useState('');
-  const [newWeekDay, setNewWeekDay] = useState('');
-  const [newWeekEnd, setNewWeekEnd] = useState('');
+  const [newWeekDay, setNewWeekDay] = useState(false);
+  const [newWeekEnd, setNewWeekEnd] = useState(false);
 
   //Eventos
 
@@ -22,8 +22,16 @@ function App() {
     setNewWeekEnd(ev.currentTarget.checked);
   };
 
+  // const handleSubmit = (ev) => {
+  //   setNewName('');
+  // };
+
   const handleClick = (ev) => {
     ev.preventDefault();
+    setNewName('');
+    setNewWeekDay(false);
+    setNewWeekEnd(false);
+
     const newClub = {
       name: newName,
       openOnWeekdays: newWeekDay,
@@ -74,6 +82,7 @@ function App() {
               type="text"
               name="name"
               id="name"
+              value={newName}
               placeholder="Nombre del Club"
               onChange={handleName}
             />
@@ -89,7 +98,7 @@ function App() {
             />
           </p>
           <p>
-            <label htmlFor="nameWeekEnds">¿Abre los fines de semana</label>
+            <label htmlFor="nameWeekEnds">¿Abre los fines de semana?</label>
             <input
               type="checkBox"
               checked={newWeekEnd}

@@ -8,6 +8,7 @@ function App() {
   const [newName, setNewName] = useState('');
   const [newWeekDay, setNewWeekDay] = useState(false);
   const [newWeekEnd, setNewWeekEnd] = useState(false);
+  const [deleteClub, setDeleteClub] = useState('');
 
   //Eventos
 
@@ -20,6 +21,12 @@ function App() {
 
   const handleWeekEnds = (ev) => {
     setNewWeekEnd(ev.currentTarget.checked);
+  };
+
+  const handleDeleteClub = (ev) => {
+    setDeleteClub(ev.target.id);
+    data.splice(deleteClub, 1);
+    setData([...data]);
   };
 
   const handleClick = (ev) => {
@@ -40,7 +47,12 @@ function App() {
   const renderClubs = data.map((oneClub, index) => (
     <li key={index}>
       <h3>
-        {`# ${index} `}
+        <i
+          className="fas fa-minus-circle"
+          onClick={handleDeleteClub}
+          id={index}
+        ></i>
+        {` ${index} `}
         {oneClub.name}
       </h3>
       <p>

@@ -54,9 +54,9 @@ function App() {
       if (filter === 'all') {
         return data;
       } else if (filter === 'weekday') {
-        return oneClub.openOnWeekdays === true;
+        return oneClub.openOnWeekdays;
       } else {
-        return oneClub.openOnWeekend === true;
+        return oneClub.openOnWeekend;
       }
     })
 

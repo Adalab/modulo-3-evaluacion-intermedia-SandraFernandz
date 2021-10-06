@@ -9,8 +9,13 @@ function App() {
   const [newWeekDay, setNewWeekDay] = useState(false);
   const [newWeekEnd, setNewWeekEnd] = useState(false);
   const [deleteClub, setDeleteClub] = useState('');
+  const [filter, setFilter] = useState('');
 
   //Eventos
+
+  const handleSearch = (ev) => {
+    setFilter(ev.target.value);
+  };
 
   const handleName = (ev) => {
     setNewName(ev.currentTarget.value);
@@ -44,25 +49,37 @@ function App() {
     setData([...data, newClub]);
   };
 
-  const renderClubs = data.map((oneClub, index) => (
-    <li key={index}>
-      <h3>
-        <i
-          className="fas fa-minus-circle"
-          onClick={handleDeleteClub}
-          id={index}
-        ></i>
-        {` ${index} `}
-        {oneClub.name}
-      </h3>
-      <p>
-        Abierto entre semana:{oneClub.openOnWeekdays === true ? 'Sí' : 'No'}
-      </p>
-      <p>
-        Abierto el fin de semana:{oneClub.openOnWeekend === true ? 'Sí' : 'No'}
-      </p>
-    </li>
-  ));
+  const renderClubs = data
+    .filter((oneClub) => {
+      if (filter === 'all') {
+        return data;
+      } else if (filter === 'weekday') {
+        return oneClub.openOnWeekdays === true;
+      } else {
+        return oneClub.openOnWeekend === true;
+      }
+    })
+
+    .map((oneClub, index) => (
+      <li key={index}>
+        <h3>
+          <i
+            className="fas fa-minus-circle"
+            onClick={handleDeleteClub}
+            id={index}
+          ></i>
+          {` ${index} `}
+          {oneClub.name}
+        </h3>
+        <p>
+          Abierto entre semana:{oneClub.openOnWeekdays === true ? 'Sí' : 'No'}
+        </p>
+        <p>
+          Abierto el fin de semana:
+          {oneClub.openOnWeekend === true ? 'Sí' : 'No'}
+        </p>
+      </li>
+    ));
   return (
     <div>
       <header>
@@ -72,10 +89,10 @@ function App() {
         </span>
 
         <span>
-          <select name="selectOption" id="selectOption">
-            <option value="">todos</option>
-            <option value="">los que abren entre semana</option>
-            <option value="">los que abren el fin de semana</option>
+          <select name="selectOption" id="selectOption" onChange={handleSearch}>
+            <option value="all">todos</option>
+            <option value="weekday">los que abren entre semana</option>
+            <option value="weekend">los que abren el fin de semana</option>
           </select>
         </span>
       </header>
